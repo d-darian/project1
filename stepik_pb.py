@@ -18,5 +18,9 @@ for i in range(n):
    r1.pop(i)
    i-=1
 
+print("Matrici")
+# print
 print(r1)
 print(r2)
+print(r1+r2)
+

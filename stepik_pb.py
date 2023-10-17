@@ -1,26 +1,55 @@
+P = "((P > (Q * (S > T ))))" # propozitie
+contor_paranteze = 0
+resultat = 1
+
+for i in range(len(P)):
+    print(P[i], end='')
+
+    if P[i] == "(":
+        contor_paranteze += 1
+    if P[i] == ")":
+        contor_paranteze -= 1
+
+for i in range(len(P)-1):
+
+    # (= || (+   ... 
+    if P[i] == "(":
+        if P[i+1] == "=" or  P[i+1] == ">" or  P[i+1] == "+" or  P[i+1] == "*":
+            resultat = 0
+            break
+
+    
+    # ~
+    if P[i] == "~":
+        if P[i+1].isalpha() == True or P[i+1] == "(":
+            resultat = 1
+        else:
+            resultat = 0
+            break
 
 
-n =  int(input())
-r1 = []
-r2 = []
-for i in range(0, n*n):
-    x = int(input())
-    r1.append(x)
+
+    # B( || )B
+    if P[i].isalpha() == True and P[i+1] == "(":
+        resultat = 0
+        break
+ 
+    if P[i] == ")" and P[i+1].isalpha() == True:
+        resultat = 0
+        break
+
+   
+
+  
+        
 
 
-for i in range(0, n*n):
-    x = int(input())
-    r1[i] += x
 
 
-for i in range(n):
-   r2.append(r1[i])
-   r1.pop(i)
-   i-=1
 
-print("Matrici")
-# print
-print(r1)
-print(r2)
-print(r1+r2)
-
+print()
+print(contor_paranteze, end='\n')
+if contor_paranteze != 0 or resultat == 0:
+    print("Sirul NU este formula bine formata")         # afisare rezultat
+else:
+    print( "Sirul ESTE formula bine formata" )
